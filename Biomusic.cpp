@@ -20,15 +20,32 @@ using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'
 #include <time.h>
 #include <stdlib.h>
 
-#define  MIDI_DEVICE  "/dev/snd/midiC1D0"
+//#define  MIDI_DEVICE  "/dev/snd/midiC1D0"
 
 static int midifd = -1;  
 
+static int baseCC = 73;
+
+
 static const char* inputs[] = {
-	"/ec4/hits",
-	"/user/1", 
-	"/ec4/hits",
-	"", 
+	"/1",
+	"/2", 
+	"/3",
+	"/4",
+	"/5",
+	"/6",
+	"/7",
+	"/8",
+	"/9",
+	"/10",
+	"/11",
+	"/12",
+	"/13",
+	"/14",
+	"/15",
+	"/16",
+	"/17",
+	"/18",
 	NULL
 };
 
@@ -73,7 +90,7 @@ protected:
 	            //https://www.midi.org/specifications/item/table-1-summary-of-midi-message
             	unsigned char packet[3];
             	packet[0] = 0b10010000; //1011=cc. 1001=noteOn, 1000=noteOff 
-            	packet[1] = (unsigned int) number; //note / cc
+            	packet[1] = (unsigned int) number + baseMidiCcc; //note / cc
             	packet[2] = (unsigned int) value; //(unsigned int)value
             	write(3, &packet, 3);
             	//std::cout << "midi message sent " << " " << number << " " << value << "\n";	
