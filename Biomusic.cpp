@@ -24,7 +24,7 @@ using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'
 
 static int midifd = -1;  
 
-static int baseCC = 73;
+static int baseMidiCc = 73;
 
 
 static const char* inputs[] = {
@@ -90,7 +90,7 @@ protected:
 	            //https://www.midi.org/specifications/item/table-1-summary-of-midi-message
             	unsigned char packet[3];
             	packet[0] = 0b10010000; //1011=cc. 1001=noteOn, 1000=noteOff 
-            	packet[1] = (unsigned int) number + baseMidiCcc; //note / cc
+            	packet[1] = (unsigned int) number + baseMidiCc; //note / cc
             	packet[2] = (unsigned int) value; //(unsigned int)value
             	write(3, &packet, 3);
             	//std::cout << "midi message sent " << " " << number << " " << value << "\n";	
