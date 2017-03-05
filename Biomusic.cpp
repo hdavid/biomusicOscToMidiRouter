@@ -89,7 +89,7 @@ protected:
     		} else if (midifd >= 0) {
 	            //https://www.midi.org/specifications/item/table-1-summary-of-midi-message
             	unsigned char packet[3];
-            	packet[0] = 0b10010000; //1011=cc. 1001=noteOn, 1000=noteOff 
+            	packet[0] = 0b10110000; //1011=cc. 1001=noteOn, 1000=noteOff 
             	packet[1] = (unsigned int) number + baseMidiCc; //note / cc
             	packet[2] = (unsigned int) value; //(unsigned int)value
             	write(3, &packet, 3);
